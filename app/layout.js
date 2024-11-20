@@ -5,23 +5,32 @@ import Logo from "./__components/Logo";
 import Header from "./__components/header";
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title:{
-    template: "The Wild Oasis",
-    default: "Welcome | the Wild Oasis"
+export const metadata ={
+  title: {
+    template : "%s / The Wild Oasis ",
+    default : "Welcome / The wild Oasis",
   },
-  description: "Luxurious cabin hotel, located in the heart of the nigeria, surrounded by beautiful mountain",
-};
+  description: "Luxurious cabin hotel , located in the heart of the Italian Dolomites, surrounded by the beautful mountains and dark forests" 
+}
+
+import { Josefin_Sans } from 'next/font/google';
+
+const josefin = Josefin_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+});
+
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       
-      <body className="antialiased bg-green-950 text-purple-50 min-h-screen flex flex-col relative" >
+      <body className={`${josefin.className} antialiased bg-primary-950 text-primary-100 min-h-screen flex flex-col relative`} >
       <Header/>
+
       <div className="flex-1 px-8 py-12 grid">
      
-      <main className="max-w-7xl w-full mx-auto">{children}</main>
+      <main className="max-w-7xl  mx-auto w-full">{children}</main>
       </div>
       </body>
     </html>

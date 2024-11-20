@@ -1,4 +1,5 @@
 
+import { getCountries } from "../__lib/data-service";
 
 // Let's imagine your colleague already built this component 😃
 

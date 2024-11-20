@@ -1,9 +1,21 @@
-import CabinCard from "../__components/CabinCard";
+import { Suspense } from "react";
+import CabinList from "../__components/cabinList";
+import Spinner from "../__components/spinner";
+import { getCabins } from "../__lib/data-service";
 
-export default function Page() {
-  // CHANGE
-  const cabins = [];
+export const metadata ={
+  title: {
+    template : "%s / The Wild Oasis ",
+    default : "Welcome / The wild Oasis",
+  },
+  description: "Luxurious cabin hotel , located in the heart of the Italian Dolomites, surrounded by the beautful mountains and dark forests" 
+}
 
+export const revalidate =3600;
+
+export default async function Page() {
+    const cabins = await getCabins()
+  
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
@@ -18,13 +30,13 @@ export default function Page() {
         to paradise.
       </p>
 
-      {cabins.length > 0 && (
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">
-          {cabins.map((cabin) => (
-            <CabinCard cabin={cabin} key={cabin.id} />
-          ))}
-        </div>
-      )}
+
+      <Suspense fallback={<Spinner/>}>
+      <CabinList/>
+      </Suspense>
+     
+      
+     
     </div>
   );
 }
